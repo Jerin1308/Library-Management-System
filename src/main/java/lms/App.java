@@ -1,10 +1,11 @@
 package lms;
 
 import lms.lib.LibManager;
+import lms.lib.LibManagers;
 
 public class App {
     public static void main( String[] args ){
-        LibManager manager = new LibManager();
+        LibManagers manager = new LibManager();
         manager.start();
     }
 }

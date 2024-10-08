@@ -3,12 +3,13 @@ package lms.lib;
 import java.sql.*;
 import java.util.Scanner;
 
-public class LibManager {
+public class LibManager implements LibManagers {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/libmanager";
     private static final String USER = "Jerin1308..";
     private static final String PASS = "@Jerin1308..";
 
+    @Override
     public void addBook(Book book) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 PreparedStatement stmt = conn.prepareStatement(
@@ -25,6 +26,7 @@ public class LibManager {
         }
     }
 
+    @Override
     public void updateBook(int id, String title, String author) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 PreparedStatement stmt = conn
@@ -44,6 +46,7 @@ public class LibManager {
         }
     }
 
+    @Override
     public void deleteBook(int id) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 PreparedStatement stmt = conn.prepareStatement("DELETE FROM library_books WHERE id = ?")) {
@@ -60,6 +63,7 @@ public class LibManager {
         }
     }
 
+    @Override
     public void listBooks() {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 Statement stmt = conn.createStatement();
@@ -78,6 +82,7 @@ public class LibManager {
         }
     }
 
+    @Override
     public void searchBooks(String query) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 PreparedStatement stmt = conn
@@ -101,6 +106,7 @@ public class LibManager {
         }
     }
 
+    @Override
     public void checkOutBook(int id) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 PreparedStatement stmt = conn.prepareStatement("UPDATE library_books SET is_Borrowed = ? WHERE id = ?")) {
@@ -118,6 +124,7 @@ public class LibManager {
         }
     }
 
+    @Override
     public void checkInBook(int id) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 PreparedStatement stmt = conn.prepareStatement("UPDATE library_books SET is_Borrowed = ? WHERE id = ?")) {
@@ -148,6 +155,7 @@ public class LibManager {
     }
 
     // Method to start the library management system
+    @Override
     public void start() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
